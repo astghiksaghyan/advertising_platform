@@ -7,8 +7,8 @@ const useBannerStore = () => {
 
     const _banners = useSelector(state => state.banners);
 
-    const _getBanners = useCallback(() => {
-        return dispatch(getBanners());
+    const _getBanners = useCallback((campaignId) => {
+        return dispatch(getBanners(campaignId));
     }, [dispatch]);
 
     return {
