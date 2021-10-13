@@ -6,9 +6,24 @@ const BannerCard = ({
     id,
     name,
     text,
+    deleteBanner,
+    showDetails
 }) => {
+    const onDelete = () => {
+        deleteBanner(id);
+    };
+
+    const showBannerDetails = () => {
+        showDetails({ id, name, text });
+    };
     return (
-        <Card id={id} title={name} extra={<CloseOutlined />} style={{ width: 300 }}>
+        <Card
+            id={id}
+            title={name}
+            extra={<CloseOutlined onClick={onDelete} />}
+            style={{ width: 300 }}
+            onClick={showBannerDetails}
+        >
             <p>{text}</p>
         </Card>
     );
