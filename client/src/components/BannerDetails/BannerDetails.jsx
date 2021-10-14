@@ -23,6 +23,7 @@ const BannerDetails = ({
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
+            initialValues={{ 'name': `${name}`, 'text': `${text}` }}
         >
             <Form.Item
                 label="Name"
@@ -34,7 +35,7 @@ const BannerDetails = ({
                     },
                 ]}
             >
-                <Input defaultValue={name}/>
+                <Input />
             </Form.Item>
             <Form.Item
                 label="Text"
@@ -46,7 +47,7 @@ const BannerDetails = ({
                     },
                 ]}
             >
-                <Input defaultValue={text}/>
+                <Input />
             </Form.Item>
             <Form.Item
                 wrapperCol={{
