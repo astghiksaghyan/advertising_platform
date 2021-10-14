@@ -6,7 +6,7 @@ import { Menu, Button } from 'antd';
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
-    ThunderboltOutlined
+    CheckCircleTwoTone
 } from '@ant-design/icons';
 
 const Sidebar = () => {
@@ -20,6 +20,12 @@ const Sidebar = () => {
 
     const toggleCollapsed = () => {
         setCollapsed(isOpen => !isOpen);
+    };
+
+    const checkIsActive = (activeHours) => {
+        const date = new Date();
+        const hour = Number(date.toLocaleString('en-US', { hour: 'numeric', hour12: false }));
+        return activeHours.includes(hour);
     };
 
     return (
@@ -41,7 +47,8 @@ const Sidebar = () => {
                 inlineCollapsed={collapsed}
             >
                 {campaigns.map((campaign) => {
-                    return <Menu.Item key={campaign.id} icon={<ThunderboltOutlined />}>
+                    const isActive = checkIsActive(campaign.activeTimes);
+                    return <Menu.Item key={campaign.id} icon={<CheckCircleTwoTone twoToneColor={isActive ? '#52c41a' : '#ffffff'}/>}>
                         <Link to={`/${campaign.id}`} key={campaign.id}>{campaign.name}</Link>
                     </Menu.Item>;
                 })}
