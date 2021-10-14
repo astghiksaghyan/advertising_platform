@@ -1,18 +1,24 @@
 import React, { useEffect } from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Select } from 'antd';
+import { useCampaignsStore } from '../../hooks/store';
+
+const { Option } = Select;
 
 const BannerDetails = ({
     id,
     name,
     text,
+    campaign,
     onSubmit
 }) => {
 
     const [form] = Form.useForm();
 
+    const { campaigns } = useCampaignsStore();
+
     useEffect(() => {
-        form.setFieldsValue({ name, text });
-    }, [form, name, text]);
+        form.setFieldsValue({ name, text, campaign });
+    }, [form, name, text, campaign]);
 
     const onFinish = (values) => {
         onSubmit({ ...values, id: id });
@@ -20,6 +26,17 @@ const BannerDetails = ({
 
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
+    };
+
+    const getSelectChildren = () => {
+        return campaigns.map((campaign) => {
+            return <Option
+                key={campaign.name + campaign.id}
+                value={campaign.id}
+            >
+                {campaign.name}
+            </Option>;
+        });
     };
 
     return (
@@ -55,6 +72,25 @@ const BannerDetails = ({
                 ]}
             >
                 <Input />
+            </Form.Item>
+            <Form.Item
+                label="Campaign"
+                name="campaign"
+                rules={[
+                    {
+                        required: true,
+                        message: 'Please select banner campaign!',
+                    },
+                ]}
+            >
+                <Select
+                    mode="multiple"
+                    allowClear
+                    style={{ width: '100%' }}
+                    placeholder="Please select"
+                >
+                    {getSelectChildren()}
+                </Select>
             </Form.Item>
             <Form.Item
                 wrapperCol={{

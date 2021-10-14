@@ -62,6 +62,7 @@ const BannersList = () => {
                     id={currentBanner ? currentBanner.id : null}
                     name={currentBanner ? currentBanner.name : ''}
                     text={currentBanner ? currentBanner.text : ''}
+                    campaign={currentBanner ? currentBanner.campaign : []}
                     onSubmit={currentBanner ? editBanner : addBanner}
                 />
             </Modal>
