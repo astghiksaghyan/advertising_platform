@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, Input, Button } from 'antd';
 
 const BannerDetails = ({
@@ -7,6 +7,13 @@ const BannerDetails = ({
     text,
     onSubmit
 }) => {
+
+    const [form] = Form.useForm();
+
+    useEffect(() => {
+        form.setFieldsValue({ name, text });
+    }, [form, name, text]);
+
     const onFinish = (values) => {
         onSubmit({ ...values, id: id });
     };
@@ -17,13 +24,13 @@ const BannerDetails = ({
 
     return (
         <Form
+            form={form}
             name="basic"
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 16 }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
-            initialValues={{ 'name': `${name}`, 'text': `${text}` }}
         >
             <Form.Item
                 label="Name"
