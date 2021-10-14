@@ -46,6 +46,7 @@ const BannersList = () => {
                         id={banner.id}
                         name={banner.name}
                         text={banner.text}
+                        campaign={banner.campaign}
                         deleteBanner={deleteBanner}
                         showDetails={showDetails}
                     />)

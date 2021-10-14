@@ -6,6 +6,7 @@ const BannerCard = ({
     id,
     name,
     text,
+    campaign,
     deleteBanner,
     showDetails
 }) => {
@@ -14,7 +15,7 @@ const BannerCard = ({
     };
 
     const showBannerDetails = () => {
-        showDetails({ id, name, text });
+        showDetails({ id, name, text, campaign });
     };
     return (
         <Card
